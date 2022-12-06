@@ -1,0 +1,102 @@
+
+# Work Distribution:
+## Aishwarya 
+Creation of the eax = 0x4FFFFFFC on gcp
+Alteration of cpuid.c for the implementation of the feature as per the specification of the assignment.
+cpuid package installation for the nested VM
+Verification and Validation of Results. (Collaboration with Aishwarya)
+
+## Srinishaa
+Creation of eax = 0x4FFFFFFD on gcp
+Alteration of vmx.c for implementing the feature as per the specification of the assignment.
+Verification of Results.
+Documentation (Collaboration with Srinishaa).
+
+## Prerequisite:
+Assignment 1 setup
+
+# Setup of gcc:
+gcloud compute instances create [YOUR_INSTANCE_NAME] --machine-type=n2-standard-8 --boot-disk-size=200 --enable-nested-virtualization
+Enable nested virtualisation 
+ We are enabling nested virtualization by adding the flag "--enable-nested-virtualization".
+
+### SSH into linux:
+gcloud compute ssh --zone "YOUR_ZONE" "YOUR_INSTANCE_NAME" --project "YOUR_PROJECT_NAME"
+
+
+### Install GCC:
+sudo apt install gcc make
+
+### Git clone repo from torvald/linux
+git clone https://github.com/aishwaryasjsu/linux
+
+### Building source tree
+sudo cp /boot/config-5.10.0-19-cloud-amd64 .config
+Run command as below:
+make oldconfig
+For architecture:
+make prepare
+make -j 8 modules
+make -j 8
+sudo make INSTALL_MOD_STRIP=1 modules_install
+sudo make install
+sudo reboot
+Now you should be able to see your updated linux version when you run the below command
+      uname -a 
+      ![image](https://user-images.githubusercontent.com/111553278/205859704-5e7c7302-1a3a-41d8-9b5f-006b1f9d70a7.png)
+
+ 
+### Install virt-install
+virt-install is a command line tool to provision new virtual machines
+Create a nested virtual machine
+sudo virt-install --name ubuntu-1 --os-variant ubuntu20.04 --vcpus 2 --ram 2048 --location http://ftp.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/ --network bridge=virbr0,model=virtio --graphics none --extra-args='console=ttyS0,115200n8 serial'
+
+### List your virtual machines
+virsh list --all
+
+### Access your nested virtual machine through the console
+sudo virsh  console ubuntu-guest
+
+### STEPS TO BE FOLLOWED:
+The file vmx.c and cpuid.c should be altered as per the specification required in the assignment.
+Alter the code in the file “vmx.c” at KVM with the path /linux/arch/x86/kvm/vmx/vmx.c.
+Alter the code in the file “cpuid.c” at KVM with the path /linux/arch/x86/kvm/cpuid.c.
+
+In the cpuid.c file for the node eax = 0x4FFFFFFC:
+The total number of exits should be returned in the eax.
+In the cpuid.c file for the node eax = 0x4FFFFFFD:
+The exit number provided for the count of exits in ecx. Then the output will be returned to  eax.
+Upon the alterations, for the effect of the changes made we should run the commands that is shown below for the kernel.
+ make -j 8 modules 
+Then we should run this command.
+ make  -j 8
+After that, we should run the below command.
+sudo make INSTALL_MOD_STRIP=1 modules_install.
+As a next step check if the kvm module is already loaded with the command:
+lsmod | grep kvm
+
+
+If it’s already loaded remove kvm using the below command:
+
+ 
+sudo rmmod kvm_intel
+sudo rmmod kvm
+sudo modprobe kvm
+sudo modprobe kvm_intel
+sudo virsh  start  ubuntu-guest
+
+
+### Verification Process:
+For verifying the code, installation of the package cpuid should be performed on the nested VM.
+Use the below commands:
+Sudo apt-get update
+Sudo apt-get  install cpuid
+
+### Verification of 0x4FFFFFFC:
+cpuid  -1 -l 0x4ffffffc
+Verification of 0x4FFFFFFD:
+cpuid -1 -l 0x4ffffffd
+
+![image](https://user-images.githubusercontent.com/111553278/205860057-223ef10c-2102-415c-8e18-b3bece4605b9.png)
+
+ 
