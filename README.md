@@ -1,16 +1,16 @@
 
 # Work Distribution:
 ## Aishwarya 
-Creation of the eax = 0x4FFFFFFC on gcp
-Alteration of cpuid.c for the implementation of the feature as per the specification of the assignment.
-cpuid package installation for the nested VM
-Verification and Validation of Results. (Collaboration with Aishwarya)
+Creation of the eax = 0x4FFFFFFC on gcp <br>
+Alteration of cpuid.c for the implementation of the feature as per the specification of the assignment. <br>
+cpuid package installation for the nested VM <br>
+Verification and Validation of Results. (Collaboration with Srinishaa) <br>
 
 ## Srinishaa
-Creation of eax = 0x4FFFFFFD on gcp
-Alteration of vmx.c for implementing the feature as per the specification of the assignment.
-Verification of Results.
-Documentation (Collaboration with Srinishaa).
+Creation of eax = 0x4FFFFFFD on gcp <br>
+Alteration of vmx.c for implementing the feature as per the specification of the assignment. <br>
+Verification of Results. <br>
+Documentation (Collaboration with Aishwarya). <br>
 
 ## Prerequisite:
 Assignment 1 setup
