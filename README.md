@@ -99,4 +99,18 @@ cpuid -1 -l 0x4ffffffd
 
 ![image](https://user-images.githubusercontent.com/111553278/205860057-223ef10c-2102-415c-8e18-b3bece4605b9.png)
 
+# ASSIGNMENT 3
+
+Minimum exit:
+![image](https://user-images.githubusercontent.com/111553278/206949372-0df1012e-4fd2-462b-870a-9217bb77b7ee.png)
+
+Maximun exit:
+![image](https://user-images.githubusercontent.com/111553278/206949432-4035459b-5ba9-41b1-898b-d6dd7f4bad3a.png)
+
+
+
+commands executed:
+![image](https://user-images.githubusercontent.com/111553278/206949283-1902f0ad-980c-4aea-a1db-e66817df4cfb.png)
+
+
  
